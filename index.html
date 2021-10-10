@@ -21,33 +21,22 @@
         var b = 255;
         var g = 0;
 
+        var db = 1
+        var dg = 1;
+
         function changeColor(context)
         {
 
-            if (i == 0)
+            b -= db;
+            g += dg;
+
+            if (b == 255)
             {
-                --b;
-                ++g;
-
-                if (b == 0)
-                {
-                    i = 1;
-                }
-                
-            }
-            else
-            {
-                ++b;
-                --g;
-
-                if (g == 0)
-                {
-                    i = 0;
-                }
-
+                db = db*(-1);
+                dg = dg*(-1);
             }
 
-            context.fillStyle = color;
+            context.fillStyle = rgb(0, g, b);
             context.fill(); 
         }
          
