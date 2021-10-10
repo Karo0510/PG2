@@ -17,22 +17,34 @@
         ctx.fillStyle = "blue";
         ctx.fill();
         ctx.stroke();
-        i = 0;
+        
+        var b = 255;
+        var g = 0;
 
         function changeColor(context)
         {
-            i == 0 ? 1: 0;
-            var color = "";
 
             if (i == 0)
             {
-                color = "blue";
-                i = 1;
+                --b;
+                ++g;
+
+                if (b == 0)
+                {
+                    i = 1;
+                }
+                
             }
             else
             {
-                color = "green";
-                i = 0;
+                ++b;
+                --g;
+
+                if (g == 0)
+                {
+                    i = 0;
+                }
+
             }
 
             context.fillStyle = color;
