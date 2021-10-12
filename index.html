@@ -18,27 +18,38 @@
         ctx.fill();
         ctx.stroke();
         
-        var b = 255;
-        var g = 0;
+        g = 0;
+        b = 255;
+        i = 1;
 
-        var db = -1
-        var dg = 1;
+        function rgb(r, g, b)
+        {
+            r = Math.floor(r);
+            g = Math.floor(g);
+            b = Math.floor(b);
+            return ["rgb(",r,",",g,",",b,")"].join("");
+        }
 
         function changeColor(context)
         {
+            b  = b - i;
+            g = g + i;
 
-            b += db;
-            g += dg;
-
-            if (b == 255)
+            if (g == 255)
             {
-                db = db*(-1);
-                dg = dg*(-1);
+                i = -i;
             }
 
-            context.fillStyle = rgb(0, g, b);
+            if (g == 0)
+            {
+                i = -i;
+            }
+
+            context.fillStyle = rgb(0,g,b);
             context.fill(); 
         }
+         
+        setInterval(function() {changeColor(ctx)}, 1);
          
         setInterval(function() {changeColor(ctx);}, 10);
     </script> 
