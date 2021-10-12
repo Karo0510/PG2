@@ -32,21 +32,13 @@
 
         function changeColor(context)
         {
-            b  = b - i;
-            g = g + i;
+            var grd = ctx.createLinearGradient(0, 0, 0, 350);
+            grd.addColorStop(1, "green");
+            grd.addColorStop(1, "blue");
+            
 
-            if (g == 255)
-            {
-                i = -i;
-            }
-
-            if (g == 0)
-            {
-                i = -i;
-            }
-
-            context.fillStyle = rgb(0,g,b);
-            context.fill(); 
+            context.fillStyle = grd;
+            context.fill();  
         }
          
         setInterval(function() {changeColor(ctx)}, 1);
