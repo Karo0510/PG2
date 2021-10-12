@@ -18,28 +18,64 @@
         ctx.fill();
         ctx.stroke();
         
-        g = 0;
-        b = 255;
         i = 1;
+        j = 1;
+        k = 1;
 
-        function rgb(r, g, b)
-        {
-            r = Math.floor(r);
-            g = Math.floor(g);
-            b = Math.floor(b);
-            return ["rgb(",r,",",g,",",b,")"].join("");
-        }
+        start  = "blue";
+        end = "green";
 
         function changeColor(context)
         {
-            var grd = ctx.createLinearGradient(0, 0, 0, 350);
-            grd.addColorStop(1, "green");
-            grd.addColorStop(1, "blue");
-            
+                var grd = context.createLinearGradient(0, 0, 0, 600);
+                grd.addColorStop(i, start);
+                grd.addColorStop(j, end);
+                
+                i -= 0.1*k;
 
-            context.fillStyle = grd;
-            context.fill();  
+                if (i <= 0)
+                {
+                    i = 0;
+                    j -= 0.1*k;
+                }
+                else if (i >= 1)
+                {
+                    i = 1;
+                    j -= 0.1*k;
+                }
+
+                if (j <= 0)
+                {
+                    j = 0;
+                }
+                else if (j >= 1)
+                {
+                    j = 1;
+                }
+
+                if (i == j)
+                {
+                    k = -k;
+
+                    if (i == 0)
+                    {
+                        start = "green";
+                        end = "blue";
+                    }
+                    else if (i == 1)
+                    {
+                        start = "blue";
+                        end = "green";
+                    }
+                }
+
+                console.log("k = "+k+" i = "+i+" j = "+j+" start = "+start+" end = "+end);
+                context.fillStyle = grd;
+                context.fill();
         }
+         
+        //changeColor(ctx, "black", "white");
+        setInterval(function() {changeColor(ctx, "black", "white")}, 50);
          
         setInterval(function() {changeColor(ctx)}, 1);
          
