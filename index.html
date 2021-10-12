@@ -18,6 +18,16 @@
         ctx.fill();
         ctx.stroke();
         
+        function rgb(r, g, b)
+        {
+            r = Math.floor(r);
+            g = Math.floor(g);
+            b = Math.floor(b);
+            return ["rgb(",r,",",g,",",b,")"].join("");
+        }
+
+       // b = 1;
+        //w = 1;
         i = 1;
         j = 1;
         k = 1;
@@ -76,10 +86,6 @@
          
         //changeColor(ctx, "black", "white");
         setInterval(function() {changeColor(ctx, "black", "white")}, 50);
-         
-        setInterval(function() {changeColor(ctx)}, 1);
-         
-        setInterval(function() {changeColor(ctx);}, 10);
     </script> 
 </body>
 </html>
