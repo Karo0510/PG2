@@ -10,10 +10,19 @@
     <canvas id="myCanvas" width="800" height="600" style="border:1px solid #d3d3d3;">
         Your browser does not support the HTML5 canvas tag.</canvas>
     <script>
+
+        x_circle = 400;
+        y_circle = 350;
+        r_circle = 50; 
+
+        w = 800;
+        h = 600;
+
         var c = document.getElementById("myCanvas");
         var ctx = c.getContext("2d");
         ctx.beginPath();
-        ctx.arc(400, 75, 50, 0, 2 * Math.PI);
+        ctx.arc(x_circle, y_circle, r_circle, 0, 2 * Math.PI);
+
         ctx.fillStyle = "blue";
         ctx.fill();
         ctx.stroke();
@@ -26,8 +35,6 @@
             return ["rgb(",r,",",g,",",b,")"].join("");
         }
 
-       // b = 1;
-        //w = 1;
         i = 1;
         j = 1;
         k = 1;
@@ -39,10 +46,9 @@
 
         function changeColor(context)
         {
-                var grd = context.createLinearGradient(0, 0, 0, 600);
+                var grd = context.createLinearGradient(0, 0, 0, h);
                 grd.addColorStop(i, start);
                 grd.addColorStop(j, end);
-                
                 
                 i -= 0.1*k;
 
@@ -81,46 +87,53 @@
                         end = "green";
                     }
                 }
-                
-                console.log("k = "+k+" i = "+i+" j = "+j+" start = "+start+" end = "+end);
+
                 context.fillStyle = grd;
                 context.fill();
         }
          
-        function position()
+        function updatePosition()
         {
-            ctx.clearRect(0, 0, 599, 799);
+            ctx.clearRect(x-cleardist, y-cleardist, x+cleardist, y+cleardist);
 
             y += dy;
 
-            if (y > 599)
+            if (y < h/2) 
             {
-                y = 599;
+                y = h/2;
+            }
+            if (y > h-w) 
+            {
+                y = h-w;
             }
 
+            ctx.beginPath();
+            ctx.arc(x_circle, y, r_circle, 0, 2 * Math.PI);
+            ctx.stroke();
         }
 
         function updateVelocity()
         {
-            if ((y >= 599) || (y <= 0)) // odbicia od poziomych krawędzi
-                {dy = -dy;}    
+            if ((y >= h-w) || (y <= h/2)) // odbicia od poziomych krawędzi
+            {
+                dy = -dy;
+            }    
         }
 
         function drawCircle(ctx)
         {
-            ctx.beginPath();
-            ctx.arc(400,75, 50, 0, 2 * Math.PI);
-            ctx.stroke();
-
+            updatePosition();
+            updateVelocity();
             changeColor(ctx);
         }
 
         function animate(ctx)
         {
-            position();
-            updateVelocity();
-            drawCircle(ctx)
+            //updatePositon(); // oblicz współrzędne nowej pozycji
+            //updateVelocity(); // jeśli trzeba odblicz nowe wektory vx i vy prędkości (jeśli potrzeba to odbij od krawędzi)
+            drawCircle(ctx); // rysuj kółko w nowym położeniu
         }
+
 
         setInterval(function() {animate(ctx)}, 1000);
     </script> 
