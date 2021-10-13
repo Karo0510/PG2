@@ -35,11 +35,14 @@
         start  = "blue";
         end = "green";
 
+        dy = 10;
+
         function changeColor(context)
         {
                 var grd = context.createLinearGradient(0, 0, 0, 600);
                 grd.addColorStop(i, start);
                 grd.addColorStop(j, end);
+                
                 
                 i -= 0.1*k;
 
@@ -78,14 +81,48 @@
                         end = "green";
                     }
                 }
-
+                
                 console.log("k = "+k+" i = "+i+" j = "+j+" start = "+start+" end = "+end);
                 context.fillStyle = grd;
                 context.fill();
         }
          
-        //changeColor(ctx, "black", "white");
-        setInterval(function() {changeColor(ctx, "black", "white")}, 50);
+        function position()
+        {
+            ctx.clearRect(0, 0, 599, 799);
+
+            y += dy;
+
+            if (y > 599)
+            {
+                y = 599;
+            }
+
+        }
+
+        function updateVelocity()
+        {
+            if ((y >= 599) || (y <= 0)) // odbicia od poziomych krawędzi
+                {dy = -dy;}    
+        }
+
+        function drawCircle(ctx)
+        {
+            ctx.beginPath();
+            ctx.arc(400,75, 50, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            changeColor(ctx);
+        }
+
+        function animate(ctx)
+        {
+            position();
+            updateVelocity();
+            drawCircle(ctx)
+        }
+
+        setInterval(function() {animate(ctx)}, 1000);
     </script> 
 </body>
 </html>
