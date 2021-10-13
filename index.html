@@ -43,6 +43,7 @@
         end = "green";
 
         dy = 10;
+        y = y_circle
 
         function changeColor(context)
         {
@@ -102,9 +103,9 @@
             {
                 y = 200;
             }
-            if (y > h-w) 
+            if (y > h-r_circle) 
             {
-                y = h-w;
+                y = h-r_circle;
             }
 
             context.beginPath();
@@ -124,7 +125,7 @@
         {
             updatePositon(ctx); 
             updateVelocity();
-            drawCircle(ctx);
+            changeColor(ctx);
         }
 
 
