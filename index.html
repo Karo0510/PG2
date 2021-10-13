@@ -92,46 +92,39 @@
                 context.fill();
         }
          
-        function updatePosition()
+        function updatePosition(context)
         {
-            ctx.clearRect(x-cleardist, y-cleardist, x+cleardist, y+cleardist);
+            context.clearRect(0, 0, w, h);
 
             y += dy;
 
-            if (y < h/2) 
+            if (y < 200) 
             {
-                y = h/2;
+                y = 200;
             }
             if (y > h-w) 
             {
                 y = h-w;
             }
 
-            ctx.beginPath();
-            ctx.arc(x_circle, y, r_circle, 0, 2 * Math.PI);
-            ctx.stroke();
+            context.beginPath();
+            context.arc(x_circle, y, r_circle, 0, 2 * Math.PI);
+            context.stroke();
         }
 
         function updateVelocity()
         {
-            if ((y >= h-w) || (y <= h/2)) // odbicia od poziomych krawędzi
+            if ((y >= h-r_circle) || (y <= h/2)) 
             {
                 dy = -dy;
             }    
         }
 
-        function drawCircle(ctx)
-        {
-            updatePosition();
-            updateVelocity();
-            changeColor(ctx);
-        }
-
         function animate(ctx)
         {
-            //updatePositon(); // oblicz współrzędne nowej pozycji
-            //updateVelocity(); // jeśli trzeba odblicz nowe wektory vx i vy prędkości (jeśli potrzeba to odbij od krawędzi)
-            drawCircle(ctx); // rysuj kółko w nowym położeniu
+            updatePositon(ctx); 
+            updateVelocity();
+            drawCircle(ctx);
         }
 
 
