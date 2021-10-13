@@ -47,7 +47,7 @@
 
         function changeColor(context)
         {
-                var grd = context.createLinearGradient(0, 0, 0, h);
+                var grd = context.createLinearGradient(0, 0, 0, 600);
                 grd.addColorStop(i, start);
                 grd.addColorStop(j, end);
                 
@@ -92,8 +92,9 @@
                 context.fillStyle = grd;
                 context.fill();
         }
+        setInterval(function() {changeColor(ctx)}, 50);
          
-        function updatePosition(context)
+        /*function updatePosition(context)
         {
             context.clearRect(0, 0, w, h);
 
@@ -103,9 +104,9 @@
             {
                 y = 200;
             }
-            if (y > h-r_circle) 
+            if (y > h-r_circle-1) 
             {
-                y = h-r_circle;
+                y = h-r_circle-1;
             }
 
             context.beginPath();
@@ -115,7 +116,7 @@
 
         function updateVelocity()
         {
-            if ((y >= h-r_circle) || (y <= h/2)) 
+            if ((y >= h-r_circle-1) || (y <= h/2)) 
             {
                 dy = -dy;
             }    
@@ -123,13 +124,13 @@
 
         function animate(ctx)
         {
-            updatePositon(ctx); 
-            updateVelocity();
+            //updatePositon(ctx); 
+            //updateVelocity();
             changeColor(ctx);
         }
 
 
-        setInterval(function() {animate(ctx)}, 1000);
+        setInterval(function() {changeColor(ctx)}, 1000);*/
     </script> 
 </body>
 </html>
